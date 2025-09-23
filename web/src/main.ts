@@ -1,19 +1,17 @@
 import './style.css'
 import init, { greet } from './wasm/rust_wasm_example.js'
 
-// コンソールログを画面に表示するための関数
-const consoleMessages = document.getElementById('console-messages')
-const originalLog = console.log
-
-console.log = function(...args: any[]) {
-  originalLog.apply(console, args)
-  const message = args.join(' ')
-  const messageElement = document.createElement('div')
-  messageElement.textContent = message
-  messageElement.style.marginBottom = '5px'
+// DOM要素にメッセージを表示する関数
+function displayMessage(message: string) {
+  const consoleMessages = document.getElementById('console-messages')
   if (consoleMessages) {
+    const messageElement = document.createElement('div')
+    messageElement.textContent = message
+    messageElement.style.marginBottom = '5px'
     consoleMessages.appendChild(messageElement)
   }
+  // 通常のコンソールにも出力
+  console.log(message)
 }
 
 async function run() {
@@ -27,13 +25,15 @@ async function run() {
       greetButton.addEventListener('click', () => {
         const nameInput = document.getElementById('name-input') as HTMLInputElement
         const name = nameInput?.value || 'World'
-        greet(name)
+        const message = greet(name)
+        displayMessage(message)
       })
     }
     
-    console.log('WebAssemblyモジュールが正常に読み込まれました！')
+    displayMessage('WebAssemblyモジュールが正常に読み込まれました！')
   } catch (error) {
     console.error('WebAssemblyモジュールの読み込みに失敗しました:', error)
+    displayMessage(`エラー: ${error}`)
   }
 }
 

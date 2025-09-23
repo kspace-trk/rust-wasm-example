@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🦀 Rust WebAssembly Example</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>🦀 Rust WebAssembly Example</h1>
+      <p>このページは Rust で書かれた WebAssembly モジュールを使用しています。</p>
+      
+      <div class="input-section">
+        <input type="text" id="name-input" placeholder="名前を入力してください" value="World">
+        <button id="greet-button">挨拶する</button>
+      </div>
+      
+      <div class="console-output" id="console-output">
+        <strong>コンソール出力:</strong><br>
+        <div id="console-messages"></div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
